@@ -1,0 +1,19 @@
+# git ignore file
+.ipynb_checkpoints
+*.pyc
+__pycache__
+results_*
+wandb*
+figs/*
+dataset/__pycache__
+dataset/brains*
+dataset/csv*
+
+
+example_data/mni_templates/*
+output/*
+notebooks/.ipynb_checkpoints
+notebooks/plots*ch
+results*
+private_notebooks/*
+model_weights/*
