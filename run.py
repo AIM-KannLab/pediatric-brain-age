@@ -4,7 +4,7 @@ import logging
 import glob, os, functools
 import sys
 sys.path.append('../')
-sys.path.append("./HDBET_Code/")
+sys.path.append("./HDBET/")
 import argparse
 import SimpleITK as sitk
 import numpy as np
@@ -35,7 +35,6 @@ warnings.filterwarnings('ignore')
 cuda_device = '0'
 os.environ['CUDA_VISIBLE_DEVICES'] = cuda_device
 
-Data https://openneuro.org/datasets/ds000228/versions/1.1.0
 img_path = '../example_data/sub-pixar015_T1w.nii.gz'
 path_to = "../output/" # save to
 
@@ -99,7 +98,7 @@ if __name__ == '__main__':
     parser.add_argument('--CUDA_VISIBLE_DEVICES', type=int, default=0)
     parser.add_argument('--input_dir', type=str, default='example_data')
     parser.add_argument('--output_path', type=str, default='output')
-    parser.add_argument('--chronological_age', type=int)
+    parser.add_argument('--chronological_age', type=float)
 
     args = parser.parse_args()
     

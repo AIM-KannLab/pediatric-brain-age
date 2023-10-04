@@ -4,7 +4,7 @@
 
 # Diffusion Deep Learning for Brain Age Prediction and Longitudinal Tracking in Children though Adulthood
 
-Here, we leveraged 32,851 T1-weighted MRI scans(Fig A) from healthy children and adolescents aged 3 to 30 from 16 multisite datasets to develop and evaluate several DL brain age frameworks, including a novel regression diffusion deep learning network (AgeDiffuse, Fig B). On multisite, external validation (5 datasets), we found that AgeDiffuse outperformed conventional DL frameworks, with a mean absolute error (MAE) of 2.78 years (IQR=[1.2-3.9], Fig C). In a second, separate external validation (3 datasets) AgeDiffuse yielded MAE 1.97 years (IQR=[0.8-2.8]). We found that AgeDiffuse brain age predictions were associated with age-related brain structure volume changes. Finally, we found that longitudinal predicted brain age tracked closely with chronological age at the individual level. 
+Here, we leveraged 32,851 T1-weighted MRI scans(Fig A) from healthy children and adolescents aged 3 to 30 from 16 multisite datasets to develop and evaluate several DL brain age frameworks, including a novel regression diffusion deep learning network (AgeDiffuse, Fig B). On multisite, external validation (5 datasets), we found that AgeDiffuse outperformed conventional deep learning frameworks, with a mean absolute error (MAE) of 2.78 years (IQR=[1.2-3.9], Fig C). In a second, separate external validation (3 datasets) AgeDiffuse yielded MAE 1.97 years (IQR=[0.8-2.8]). We found that AgeDiffuse brain age predictions were associated with age-related brain structure volume changes. Finally, we found that longitudinal predicted brain age tracked closely with chronological age at the individual level. 
 
 If you publish any work which uses this package, please cite the following publication: /link
 
@@ -17,7 +17,7 @@ This repository was developed and tested on the following hardware:
 - Ubuntu 22.04.1 LTS, 1x Nvidia RTX A6000 GPU
 
 ## Quick Start - No Docker (single MRI T1 inference)
-**Prerequisites: conda, gpu** 
+**Prerequisites: conda, gpu, cuda drivers** 
 
 1. Clone repo `git clone`
 
@@ -27,7 +27,7 @@ This repository was developed and tested on the following hardware:
 3. To activate the enviroment:
 `conda activate pba`
 
-5. Download Weights from /link and place into /path
+5. Download model weights from [link](https://drive.google.com/file/d/1RC4lB2_qTP8tjVkoOpB74-KjCTujY8pt/view?usp=sharing) (12 GB), unzip and place into /model_weights path.
 
 5. For demo on TM pipeline launch jupyter notebook `notebooks/demo_notebook.ipynb` inside conda enviroment. Estimated inference time: 5 minutes (on Nvidia RTX A6000 GPU)
 
@@ -44,9 +44,11 @@ This repository was developed and tested on the following hardware:
 `docker run --gpus all -it pba`
 
 4. To run docker on your own MRI:
-`docker run -it --gpus all -v local_folder_with_nii_path:/out pba`
+`docker run -it --gpus 0 -v ${PWD}/output:/output/ -v ${PWD}/model_weights:/model_weights/ pba --chronological_age 4.8`
+
 - local_folder_with_nii_path is the path to the folder with your MRI and file.nii is the name of the MRI file; it is also the path to the output folder where the results will be saved.
 
+todo: fix hdbet weights
 ## Jupiter notebook inference demo (no docker) 
 **Prerequisites: conda, gpu** 
 
@@ -58,20 +60,27 @@ conda activate brain-age
 
 1. Run the notebook:
 ```
-jupyter notebook notebooks/Demo-notebook.ipynb
+jupyter notebook 
 ```
+And navigate to `notebooks/Demo-notebook.ipynb`
 
 ## To retrain on your own MRI dataset: 
  TBD
 
-## Thanks
-The method is elaborated in the paper [DiffMIC: Dual-Guidance Diffusion Network for Medical Image Classification](https://arxiv.org/abs/2303.10610).
-Code is largely based on [XzwHan/CARD](https://github.com/XzwHan/CARD), [CompVis/stable-diffusion](https://github.com/CompVis/stable-diffusion), [MedSegDiff](https://github.com/WuJunde/MedSegDiff/tree/master), [nyukat/GMIC](https://github.com/nyukat/GMIC)
+## Acknowledgements
+- [DiffMIC: Dual-Guidance Diffusion Network for Medical Image Classification](https://arxiv.org/abs/2303.10610).
+- [XzwHan/CARD](https://github.com/XzwHan/CARD)
+- [CompVis/stable-diffusion](https://github.com/CompVis/stable-diffusion)
+- [MedSegDiff](https://github.com/WuJunde/MedSegDiff/tree/master)
+- [nyukat/GMIC](https://github.com/nyukat/GMIC)
+- [HDBET](https://github.com/MIC-DKFZ/HD-BET)
 
 
 ## Cite
-If you find this code useful, please cite:
-TBD
+If you find this code useful, please cite: TBD
+
+## Dataset
+For mode details on the dataset, please refer to the following paper: TBD
 
 ### LICENSE: CC BY-NC 4.0
 

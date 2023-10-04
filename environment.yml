@@ -2,13 +2,10 @@ name: pba
 channels:
   - pytorch
   - conda-forge
-  - https://mirrors.tuna.tsinghua.edu.cn/anaconda/cloud/msys2/
-  - https://mirrors.tuna.tsinghua.edu.cn/anaconda/cloud/conda-forge
-  - https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/free/
   - defaults
 dependencies:
   - pillow=8.4.0
-  - pip=21.2.4
+  - pip
   - python=3.8.12
   - statsmodels=0.12.1
   - torchaudio=0.10.0
@@ -17,8 +14,6 @@ dependencies:
     - setuptools
     - SimpleITK
     - itk-elastix
-    - intensity-normalization[ants]
-    - huggingface-hub
     - imageio
     - ipython
     - json5
@@ -35,5 +30,5 @@ dependencies:
     - tqdm
     - seaborn
     - jupyter
-    - wandb
+    - nibabel
 
