@@ -38,7 +38,7 @@ This repository was developed and tested on the following hardware:
 
 2. To create a docker:
 `cd docker`
-`docker build -t pba -f Dockerfile . --no-cache`
+`docker build -t pba . `
 
 3. To run docker on example MRI:
 `docker run --gpus all -it pba`
