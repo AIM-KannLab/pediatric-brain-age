@@ -1,4 +1,4 @@
-name: diffmic
+name: pba
 channels:
   - pytorch
   - conda-forge

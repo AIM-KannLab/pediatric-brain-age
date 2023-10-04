@@ -1,38 +1,68 @@
-# RegDiff
+<p align="center">
+    <img src="imgs/logo.png" width="300"> 
+</p>
 
-data prep:
-0. intitial preprocess: from the Tmt pipeline
-1. skull strip pytorch/skull_stripping.py
-2. create quantiles  python dataset/preprocess_datasets_T1_to_2d.py
-3. create dataframes python dataset/create_df.py 
+# Diffusion Deep Learning for Brain Age Prediction and Longitudinal Tracking in Children though Adulthood
 
+Here, we leveraged 32,851 T1-weighted MRI scans(Fig A) from healthy children and adolescents aged 3 to 30 from 16 multisite datasets to develop and evaluate several DL brain age frameworks, including a novel regression diffusion deep learning network (AgeDiffuse, Fig B). On multisite, external validation (5 datasets), we found that AgeDiffuse outperformed conventional DL frameworks, with a mean absolute error (MAE) of 2.78 years (IQR=[1.2-3.9], Fig C). In a second, separate external validation (3 datasets) AgeDiffuse yielded MAE 1.97 years (IQR=[0.8-2.8]). We found that AgeDiffuse brain age predictions were associated with age-related brain structure volume changes. Finally, we found that longitudinal predicted brain age tracked closely with chronological age at the individual level. 
+
+If you publish any work which uses this package, please cite the following publication: /link
+
+![Main figure](imgs/main.png)
+
+**Not intended for clinical use.**
+
+## Hardware requirements
+This repository was developed and tested on the following hardware:
+- Ubuntu 22.04.1 LTS, 1x Nvidia RTX A6000 GPU
+
+## Quick Start - No Docker (single MRI T1 inference)
+**Prerequisites: conda, gpu** 
+
+1. Clone repo `git clone`
+
+2. To create an enviroment, run: 
+`conda env create -f environment.yml`
+
+3. To activate the enviroment:
+`conda activate pba`
+
+5. Download Weights from /link and place into /path
+
+5. For demo on TM pipeline launch jupyter notebook `notebooks/demo_notebook.ipynb` inside conda enviroment. Estimated inference time: 5 minutes (on Nvidia RTX A6000 GPU)
+
+## Quick Start - Docker(single MRI T1 inference), estimated time for set up: 10-15 minutes
+
+**Prerequisites: conda, gpu, docker** 
+1. Clone repo `git clone`
+
+2. To create a docker:
+`cd docker`
+`docker build -t pba -f Dockerfile . --no-cache`
+
+3. To run docker on example MRI:
+`docker run --gpus all -it pba`
+
+4. To run docker on your own MRI:
+`docker run -it --gpus all -v local_folder_with_nii_path:/out pba`
+- local_folder_with_nii_path is the path to the folder with your MRI and file.nii is the name of the MRI file; it is also the path to the output folder where the results will be saved.
+
+## Jupiter notebook inference demo (no docker) 
+**Prerequisites: conda, gpu** 
+
+0. Create enviroment:
 ```
-median: python main.py --device 0 --thread 8 --loss diffmic_conditional --config configs/brain.yml --exp results_brain_reg_50 --doc brain --n_splits 1 
-python main.py --device 0 --thread 8 --loss diffmic_conditional --config results_brain_reg_med/logs/ --exp results_brain_reg_med --doc brain --n_splits 1 --test --eval_best
-
- # median mip: python main.py --device 0 --thread 8 --loss diffmic_conditional --config configs/brain_reg_mip.yml --exp results_brain_medians_mip --doc brain --n_splits 1 
-python main.py --device 0 --thread 8 --loss diffmic_conditional --config results_brain_medians_mip/logs/ --exp results_brain_medians_mip --doc brain --n_splits 1 --test --eval_best
-
- # quantile 25: python main.py --device 0 --thread 8 --loss diffmic_conditional --config configs/brain_reg_25.yml --exp results_brain_reg_25 --doc brain --n_splits 1  
-python main.py --device 0 --thread 8 --loss diffmic_conditional --config results_brain_reg_25/logs/ --exp results_brain_reg_25 --doc brain --n_splits 1 --test --eval_best
-
-#37 python main.py --device 0 --thread 8 --loss diffmic_conditional --config configs/brain_reg_37.yml --exp results_brain_reg_37 --doc brain --n_splits 1   
- python main.py --device 0 --thread 8 --loss diffmic_conditional --config results_brain_reg_37_y/logs/ --exp results_brain_reg_37_y --doc brain --n_splits 1  --test --eval_best 
-
-# 62 python main.py --device 0 --thread 8 --loss diffmic_conditional --config configs/brain_reg_62.yml --exp results_brain_reg_62 --doc brain --n_splits 1   
-python main.py --device 0 --thread 8 --loss diffmic_conditional --config results_brain_reg_62_y/logs/ --exp results_brain_reg_62_y --doc brain --n_splits 1   --test --eval_best 
-
-# quantile 75: python main.py --device 0 --thread 8 --loss diffmic_conditional --config configs/brain_reg_75.yml --exp results_brain_reg_75 --doc brain --n_splits 1 
-python main.py --device 0 --thread 8 --loss diffmic_conditional --config results_brain_reg_75/logs/ --exp results_brain_reg_75 --doc brain --n_splits 1 --test --eval_best 
+conda env create -f environment.yml
+conda activate brain-age
 ```
 
-## A Quick Overview 
+1. Run the notebook:
+```
+jupyter notebook notebooks/Demo-notebook.ipynb
+```
 
-## Requirements
-``conda env create -f environment.yml``
-
-## Run
-notebooks/Demo-notebook.ipynb
+## To retrain on your own MRI dataset: 
+ TBD
 
 ## Thanks
 The method is elaborated in the paper [DiffMIC: Dual-Guidance Diffusion Network for Medical Image Classification](https://arxiv.org/abs/2303.10610).
@@ -40,8 +70,14 @@ Code is largely based on [XzwHan/CARD](https://github.com/XzwHan/CARD), [CompVis
 
 
 ## Cite
-If you find this code useful, please cite 
+If you find this code useful, please cite:
+TBD
 
+### LICENSE: CC BY-NC 4.0
+
+This work is licensed under the Creative Commons Attribution-NonCommercial 4.0 International License.
+To view a copy of this license, visit <http://creativecommons.org/licenses/by-nc/4.0/> or send a letter to Creative Commons, PO Box 1866, Mountain View, CA 94042, USA.
+Copyright (c) [2023] [Diffusion Deep Learning for Brain Age Prediction and Longitudinal Tracking in Children though Adulthood]
 
 
 
