@@ -116,7 +116,7 @@ if __name__ == '__main__':
         image, affine  = nii.get_fdata(), nii.affine
 
         # path to store registered image in
-        new_path_to = output_path+img_path.split("/")[-1].split(".")[0]
+        new_path_to = output_path+"/"+img_path.split("/")[-1].split(".")[0]
         if not os.path.exists(path_to):
             os.mkdir(path_to)
         if not os.path.exists(new_path_to):
@@ -127,10 +127,6 @@ if __name__ == '__main__':
         print("Registering to template:", golden_file_path)
         #fun fact: the registering to the template pipeline is not deterministic
         register_to_template(img_path, new_path_to, golden_file_path,"registered.nii.gz", create_subfolder=False)
-
-        # enchance and normalize image
-        if not os.path.exists(new_path_to+"/no_z"):
-            os.mkdir(new_path_to+"/no_z")
             
         image_sitk =  sitk.ReadImage(new_path_to+"/registered.nii.gz")
         image_array  = sitk.GetArrayFromImage(image_sitk)
@@ -216,10 +212,12 @@ if __name__ == '__main__':
                 error = result.stder
             except:
                 error = 0
-            print(output)
+                
             age = float(output.split("\n")[1].split(" ")[-1].replace("[","").replace("]",""))
             age_preds.append(age)
             
         pred_age=outlier_voting(age_preds)
         print("Predicted age:", round(pred_age,2),'years')
         print("MAE:",round(pred_age - gt_age,2),'years')
+        
+#python main.py --device 0 --config output/sub-pixar015_T1w/configs25.yml --exp output/sub-pixar015_T1w --doc brain --test --eval_best --eval_path model_weights/25ckpt_best.pth --eval_path_aux model_weights/25aux_ckpt.pth

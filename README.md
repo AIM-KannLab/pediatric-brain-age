@@ -36,20 +36,18 @@ This repository was developed and tested on the following hardware:
 **Prerequisites: conda, gpu, docker** 
 1. Clone repo `git clone`
 
-2. To create a docker:
-`cd docker`
+2. To build a docker:
 `docker build -t pba . `
 
 3. To run docker on example MRI:
-`docker run --gpus all -it pba`
+`docker run -it --gpus X -v ${PWD}/output:/output/ -v ${PWD}/model_weights:/model_weights/ pba --chronological_age Y`
+- Y is chronological age in years (example: 10.4)
+- output is the path to the output folder where the results will be saved
+- model_weights is the path to the folder with model weights
+- X gpu id to use (example: 0)
 
-4. To run docker on your own MRI:
-`docker run -it --gpus 0 -v ${PWD}/output:/output/ -v ${PWD}/model_weights:/model_weights/ pba --chronological_age 4.8`
 
-- local_folder_with_nii_path is the path to the folder with your MRI and file.nii is the name of the MRI file; it is also the path to the output folder where the results will be saved.
-
-todo: fix hdbet weights
-## Jupiter notebook inference demo (no docker) 
+## Jupiter notebook inference demo (no docker needed) 
 **Prerequisites: conda, gpu** 
 
 0. Create enviroment:
@@ -64,8 +62,14 @@ jupyter notebook
 ```
 And navigate to `notebooks/Demo-notebook.ipynb`
 
-## To retrain on your own MRI dataset: 
- TBD
+
+## Things To-Do:
+- [ ] retraining on your own MRI dataset how-to
+- [ ] batched inference
+- [X] create docker
+- [ ] create CPU-only inference and docker
+- [ ] replace itk-registration with cmd line version
+
 
 ## Acknowledgements
 - [DiffMIC: Dual-Guidance Diffusion Network for Medical Image Classification](https://arxiv.org/abs/2303.10610).
