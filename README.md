@@ -1,9 +1,9 @@
 <p align="center">
-    <img src="imgs/logo.png" width="300" a href=”https://guessmybrainage.webflow.io/”> 
+    <img src="imgs/logo.png" width="300"> 
 </p>
 
 # Diffusion Deep Learning for Brain Age Prediction and Longitudinal Tracking in Children though Adulthood
-
+[Webpage](https://guessmybrainage.webflow.io/)
 Here, we leveraged 32,851 T1-weighted MRI scans(Fig A) from healthy children and adolescents aged 3 to 30 from 16 multisite datasets to develop and evaluate several DL brain age frameworks, including a novel regression diffusion deep learning network (AgeDiffuse, Fig B). On multisite, external validation (5 datasets), we found that AgeDiffuse outperformed conventional deep learning frameworks, with a mean absolute error (MAE) of 2.78 years (IQR=[1.2-3.9], Fig C). In a second, separate external validation (3 datasets) AgeDiffuse yielded MAE 1.97 years (IQR=[0.8-2.8]). We found that AgeDiffuse brain age predictions were associated with age-related brain structure volume changes. Finally, we found that longitudinal predicted brain age tracked closely with chronological age at the individual level. 
 
 If you publish any work which uses this package, please cite the following publication: /link
