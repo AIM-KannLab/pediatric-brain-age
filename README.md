@@ -1,5 +1,5 @@
 <p align="center">
-    <img src="imgs/logo.png" width="300"> 
+    <img src="imgs/logo.png" width="300" a href=”https://guessmybrainage.webflow.io/”> 
 </p>
 
 # Diffusion Deep Learning for Brain Age Prediction and Longitudinal Tracking in Children though Adulthood
@@ -81,10 +81,10 @@ And navigate to `notebooks/Demo-notebook.ipynb`
 
 
 ## Cite
-If you find this code useful, please cite: TBD
+If you find this code useful, please cite: [Paper](https://www.medrxiv.org/content/10.1101/2023.10.17.23297166.full.pdf)
 
 ## Dataset
-For mode details on the dataset, please refer to the following paper: TBD
+For mode details on the dataset, please refer to the following paper: [Paper](https://www.medrxiv.org/content/10.1101/2023.10.17.23297166.full.pdf)
 
 ### LICENSE: CC BY-NC 4.0
 
